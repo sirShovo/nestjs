@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -24,4 +24,17 @@ export class AppController {
   ) {
     return `Product ${productId} and the category is ${categoryId}`;
   }
+
+  // Recibiendo Query params
+  @Get('products/all')
+  getAll(@Query('limit') limit: number, @Query('offset') offset: number) {
+    return `Products: limit => ${limit}, offset ${offset}`;
+  }
+
+  // Una forma de hacerlo
+  // @Get('products/all')
+  // getAll(@Query() params: { limit: number; offset: number }) {
+  //   const { limit, offset } = params;
+  //   return `Products: limit => ${limit}, offset ${offset}`;
+  // }
 }
